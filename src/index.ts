@@ -79,6 +79,7 @@ app.get('/s/:shortCode', async (c) => {
     return c.text('Not Found', 404)
   }
 
+  c.res.headers.set('Cache-Control', 'public, max-age=31536000, immutable')
   return c.redirect(url, 301)
 })
 
