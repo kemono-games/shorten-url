@@ -9,5 +9,5 @@ API_KEY = "baccano"
 
 [[kv_namespaces]]
 binding = "KV"
-id = "2d552022dbc74142a59afad474e08060"
-preview_id = "fc8c79e887ec43238e103c93fae23e69"
+id = "some_id"
+preview_id = "some_id"
