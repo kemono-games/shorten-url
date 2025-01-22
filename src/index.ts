@@ -22,7 +22,8 @@ function generateShortUrl(url: string, salt: boolean = false): string {
 }
 
 app.post('/s', async (c) => {
-  const apiKey = c.req.header('Authorization')
+  const authHeader = c.req.header('Authorization')
+  const apiKey = authHeader?.startsWith('Bearer ') ? authHeader.replace(/^Bearer\s+/, '') : authHeader
   if (apiKey !== c.env.API_KEY) {
     return c.json({ error: 'Unauthorized' }, 401)
   }
@@ -32,7 +33,7 @@ app.post('/s', async (c) => {
 
   if (c.req.query('url')) {
     url = c.req.query('url') as string
-  } else if (contentType === 'application/json') {
+  } else if (contentType?.startsWith('application/json')) {
     const json = await c.req.json()
     url = json.url
   } else if (
